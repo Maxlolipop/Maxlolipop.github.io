@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MNT Media — Photographie sportive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --canvas: #000;
+    --surface-card: #1a1a1a;
+    --surface-soft: #0d0d0d;
+    --ink: #fff;
+    --body: #bbb;
+    --muted: #7e7e7e;
+    --hairline: #3c3c3c;
+    --m-blue-light: #0066b1;
+    --m-blue-dark: #1c69d4;
+    --m-red: #e22718;
+    --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--canvas); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  body { font-weight: 300; font-size: 16px; line-height: 1.5; }
+  img { display: block; max-width: 100%; }
+
+  .container { max-width: 1440px; margin: 0 auto; padding: 0 40px; }
+
+  .m-stripe {
+    height: 4px;
+    background: linear-gradient(to right, #ff6a1f 0%, #c81d77 100%);
+  }
+
+  /* Brand row */
+  .brand-row {
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand-mark {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 96px 0 64px;
+  }
+  .hero h1 {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(40px, 7vw, 80px);
+    line-height: 1;
+    letter-spacing: -0.5px;
+    max-width: 18ch;
+  }
+  .hero p.lede {
+    margin-top: 24px;
+    font-weight: 300;
+    color: var(--body);
+    font-size: 20px;
+    max-width: 60ch;
+  }
+
+  /* CTA cluster */
+  .cta-cluster {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 32px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    background: var(--canvas);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .btn:hover { background: var(--ink); color: var(--canvas); }
+  .btn--outline { background: transparent; }
+  .btn .arrow { margin-left: 12px; }
+
+  .email-link {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 4px;
+  }
+  .email-link:hover { border-bottom-color: var(--ink); }
+
+  /* Section */
+  .section { padding: 96px 0; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+  }
+  .section-kicker {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--body);
+  }
+
+  /* Portfolio grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .tile {
+    background: var(--surface-card);
+    aspect-ratio: 4 / 5;
+    position: relative;
+    overflow: hidden;
+  }
+  .tile img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .tile:hover img { transform: scale(1.04); }
+  .tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 45%);
+    pointer-events: none;
+  }
+
+  /* Contact band */
+  .contact-band {
+    padding: 96px 0;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    text-align: center;
+  }
+  .contact-band h2 {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05;
+    max-width: 22ch;
+    margin: 0 auto;
+  }
+  .contact-band .email-big {
+    display: inline-block;
+    margin-top: 32px;
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+  }
+  .contact-band .cta-cluster { justify-content: center; }
+
+  /* Footer */
+  footer {
+    background: var(--canvas);
+    padding: 64px 0 40px;
+    color: var(--muted);
+  }
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .container { padding: 0 24px; }
+    .brand-row { padding: 24px; }
+    .hero { padding: 64px 0 48px; }
+    .section { padding: 64px 0; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="m-stripe"></div>
+
+<header class="brand-row">
+  <span class="brand-mark">MNT Media</span>
+</header>
+
+<main>
+  <section class="hero container">
+    <h1>Prêts pour une nouvelle ère de photos sportives&nbsp;?</h1>
+    <p class="lede">Contactez-nous dès maintenant. Photographie de sport, capturée avec la précision d'un atelier d'ingénierie.</p>
+
+    <div class="cta-cluster">
+      <a class="btn" href="https://shop.mntmedia.ca/login">Accéder à la boutique <span class="arrow">→</span></a>
+      <a class="email-link" href="mailto:info@mntmedia.ca">info@mntmedia.ca</a>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head">
+      <h2>Portfolio</h2>
+      <span class="section-kicker">Sélection récente</span>
+    </div>
+
+    <div class="grid">
+      <div class="tile"><img src="img/00001img.png" alt="" loading="lazy" /></div>
+      <div class="tile"><img src="img/00002img.png" alt="" loading="lazy" /></div>
+      <div class="tile"><img src="img/00003img.png" alt="" loading="lazy" /></div>
+      <div class="tile"><img src="img/00004img.jpg" alt="" loading="lazy" /></div>
+      <div class="tile"><img src="img/00005img.jpg" alt="" loading="lazy" /></div>
+      <div class="tile"><img src="img/00006img.jpg" alt="" loading="lazy" /></div>
+      <div class="tile"><img src="img/00007img.jpg" alt="" loading="lazy" /></div>
+      <div class="tile"><img src="img/00008img.jpg" alt="" loading="lazy" /></div>
+      <div class="tile"><img src="img/00009img.jpg" alt="" loading="lazy" style="object-position: top;" /></div>
+    </div>
+  </section>
+
+  <section class="contact-band">
+    <div class="container">
+      <h2>Contactez-nous dès maintenant</h2>
+      <a class="email-big" href="mailto:info@mntmedia.ca">info@mntmedia.ca</a>
+      <div class="cta-cluster">
+        <a class="btn btn--outline" href="https://shop.mntmedia.ca/login">Visiter la boutique <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="m-stripe"></div>
+
+<footer>
+  <div class="container">
+    <span>© MNT Media</span>
+    <span>info@mntmedia.ca</span>
+  </div>
+</footer>
+
+</body>
+</html>
