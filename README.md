@@ -1,2 +1,2 @@
 # Maxlolipop.github.io
-Tremblant Team Tracker
+Front page holder
