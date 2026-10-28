@@ -206,6 +206,9 @@
     font-size: 12px;
     letter-spacing: 0.5px;
   }
+  footer a { color: var(--muted); text-decoration: none; margin-left: 16px; }
+  footer a:first-child { margin-left: 0; }
+  footer a:hover { color: var(--ink); }
 
   @media (max-width: 900px) {
     .grid { grid-template-columns: repeat(2, 1fr); }
@@ -273,6 +276,7 @@
 <footer>
   <div class="container">
     <span>© MNT Media</span>
+    <span><a href="/privacy-policy/">Privacy / Confidentialité</a><a href="/data-deletion/">Data deletion / Suppression</a></span>
     <span>info@mntmedia.ca</span>
   </div>
 </footer>
